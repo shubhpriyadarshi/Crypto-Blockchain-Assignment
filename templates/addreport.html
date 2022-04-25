@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% from "_formhelpers.html" import render_field %}
+	<form method=post>
+		<div class="row mt-5">
+			<div class="col-6">
+				<dl class="col-6">
+					{{ render_field(form.username) }}
+					
+					{{ render_field(form.medicine) }}
+				</dl>
+			</div>
+			<div class="col-6">
+				<dl>
+					{{ render_field(form.visit_type) }}
+					{{ render_field(form.report) }}
+				  </dl>
+			</div>
+		</div>
+	  
+	
+	  <p><input type=submit class="btn btn-primary btn-lg active" value=Add>
+	</form>
+{% endblock content %}

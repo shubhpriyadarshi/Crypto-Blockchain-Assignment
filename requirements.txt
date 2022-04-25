@@ -1,0 +1,5 @@
+flask
+requests
+wtforms
+flask_wtf
+pipenv

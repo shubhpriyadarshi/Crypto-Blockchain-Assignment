@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    
+    <br>
+    <br>
+    {% if data %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Visit Type</th>
+            <th>Report</th>
+            <th>Medicine</th>
+            
+          </tr>
+      
+        {% for report in data %}
+          {% if report %}
+            {% for r in report %}
+            <tr>
+              {% for key, value in r.items() %}
+                <td>{{ value }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+          
+      
+    </table>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <div class="container">
+        <p class="row">
+            <p class="col-6">
+                <img src="/static/data-report-illustration-concept_114360-883.webp" alt="front-img" width="350" height="300">
+            </p>
+            <p class="col-6">
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.username.label }}
+                        {{ form.username(size=32) }}
+                        {% for error in form.username.errors %}
+                        <span style="color:red;">[{{error}}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.password.label }}
+                        {{ form.password(size=32) }}
+                        {% for error in form.password.errors %}
+                        <span style="color:red;">[{{error}}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>{{ form.submit() }}</p>
+                </form>
+            </p>
+        </p>
+    </div>
+    
+{% endblock %}
