@@ -27,26 +27,7 @@ $ git clone https://github.com/shubhpriyadarshi/Crypto-Blockchain-Assignment.git
 $ cd Crypto-Blockchain-Assignment
 $ pipenv install
 $ pipenv shell
-$ python Flask-server.py
-```
-
-```
-Or directly
-$ git clone <link>
-$ cd to cloned dir
-$ python Flask-server.py
-```
-
-After installing virtual env:
-
-```
-pipenv shell
-python Flask-server.py
-```
-
-```
-Or directly
-$ python Flask-server.py
+$ python main.py
 ```
 
 #### Sample Users:
