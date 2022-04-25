@@ -23,8 +23,8 @@ $ pip install -r requirements.txt
 clone and start:
 
 ```
-$ git clone <link>
-$ cd to cloned dir
+$ git clone https://github.com/shubhpriyadarshi/Crypto-Blockchain-Assignment.git
+$ cd Crypto-Blockchain-Assignment
 $ pipenv install
 $ pipenv shell
 $ python Flask-server.py
@@ -52,8 +52,6 @@ $ python Flask-server.py
 #### Sample Users:
 
 -   ayush : ayush-mediblok
--   shubh : #
--   piyush : #
 
 ## Contributors
 
