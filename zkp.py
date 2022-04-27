@@ -6,7 +6,7 @@ def HASH(a, b, c):
     hash.update(str(a).encode())
     hash.update(str(b).encode())
     hash.update(str(c).encode())
-    return int(hash.hexdigest(),16)
+    return int(hash.hexdigest(), 16)
 
 def convert_message_to_int(M):
     return int(sha256(M.encode()).hexdigest(), 16)
@@ -20,29 +20,27 @@ def gen_public_sig(X, M):
 
     m = convert_message_to_int(M)
 
+    x = x+m
+
     y = pow(a, x, p)
     r = randint(1, p - 1)
 
-    t1 = pow(m, x, p)
-    t2 = pow(m, r, p)
     t3 = pow(a, r, p)
-    c = HASH(t1, t2, t3)
+    c = randint(0, 1)
 
     s = (c * x) + r
 
-    tuple = (y, s, t1, t2, t3)
+    tuple = (y, s, c, t3)
     
     return tuple
 
 # verify the 
 def verify(t):
 
-    y, s, t1, t2, t3 = t
+    y, s, c, t3 = t
 
     a = 2  # Generator
     p = 2695139 # Large Prime Number
-
-    c = HASH(t1, t2, t3)
 
     if (pow(a, s, p) == (pow(y, c, p) * t3) % p):
         return True
