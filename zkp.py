@@ -25,23 +25,23 @@ def gen_public_sig(X, M):
     y = pow(a, x, p)
     r = randint(1, p - 1)
 
-    t3 = pow(a, r, p)
+    t = pow(a, r, p)
     c = randint(0, 1)
 
     s = (c * x) + r
 
-    tuple = (y, s, c, t3)
+    tuple = (y, s, c, t)
     
     return tuple
 
 # verify the 
-def verify(t):
+def verify(tuple):
 
-    y, s, c, t3 = t
+    y, s, c, t = tuple
 
     a = 2  # Generator
     p = 2695139 # Large Prime Number
 
-    if (pow(a, s, p) == (pow(y, c, p) * t3) % p):
+    if (pow(a, s, p) == (pow(y, c, p) * t) % p):
         return True
     return False

@@ -12,38 +12,14 @@ class Blockchain(object):
 
     def __init__(self, user):
         self.chain = []
-        self.current_transactions = []
+        self.pending_transactions = []
         self.user = user
 
         # Create the genesis Block
-        self.new_block(previous_hash=1, nounce=100)
+        self.new_block(nounce=100, previous_hash=1)
 
         # Load the Blockchain 
         Blockchain.load_blockchains()
-        
-    def new_block(self, nounce, previous_hash=None):
-        """
-        Forge a new Block in the Blockchain
-        :param nouce is used to satisfy the difficulty for the Proof of Work algorithm
-        :return return the new Block
-        """
-
-        block = {
-            'index': len(self.chain) + 1,
-            'timestamp': time(),
-            'transactions': self.current_transactions,
-            'nounce': nounce,
-            'previous_hash': previous_hash or self.hash(self.chain[-1]),
-        }
-
-        print("block created: {}".format(block))
-
-        # Reset the current list of transactions
-        self.current_transactions = []
-
-        self.chain.append(block)
-        Blockchain.save_blockchains()
-        return block
     
     def new_transaction(self, user, doctor, visit_type, report, medicine, tuple):
         # Adding transaction to the list of transactions to be mined
@@ -51,7 +27,7 @@ class Blockchain(object):
         if (not verify(tuple)):
             return False
 
-        self.current_transactions.append({
+        self.pending_transactions.append({
             'user': user,
             'doctor': doctor,
             'visit_type': visit_type,
@@ -73,6 +49,31 @@ class Blockchain(object):
 
         block_string = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
+
+                
+    def new_block(self, nounce, previous_hash=None):
+        """
+        Forge a new Block in the Blockchain
+        :param nouce is used to satisfy the difficulty for the Proof of Work algorithm
+        :return return the new Block
+        """
+
+        block = {
+            'index': len(self.chain) + 1,
+            'timestamp': time(),
+            'transactions': self.pending_transactions,
+            'nounce': nounce,
+            'previous_hash': previous_hash or self.hash(self.chain[-1]),
+        }
+
+        print("block created: {}".format(block))
+
+        # Reset the current list of transactions
+        self.pending_transactions = []
+
+        self.chain.append(block)
+        Blockchain.save_blockchains()
+        return block
 
     def proof_of_work(self, last_nounce):
         """
